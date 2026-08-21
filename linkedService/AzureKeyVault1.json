@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "AzureKeyVault",
 		"typeProperties": {
-			"baseUrl": "https://weather-integration-dev.vault.azure.net/"
+			"baseUrl": "https://kv-entrprse-integration.vault.azure.net/"
 		}
 	}
 }
