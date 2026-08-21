@@ -1,0 +1,95 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_ADLS_Raw_JSON",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_SQL_Staging_Products",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_ADLS_Curated_Parquet",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "flatten1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          limit as short,",
+				"          products as (availabilityStatus as string, brand as string, category as string, description as string, dimensions as (depth as double, height as double, width as double), discountPercentage as double, id as short, images as string[], meta as (barcode as long, createdAt as string, qrCode as string, updatedAt as string), minimumOrderQuantity as short, price as double, rating as double, returnPolicy as string, reviews as (comment as string, date as string, rating as short, reviewerEmail as string, reviewerName as string)[], shippingInformation as string, sku as string, stock as short, tags as string[], thumbnail as string, title as string, warrantyInformation as string, weight as short)[],",
+				"          skip as boolean,",
+				"          total as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> source1",
+				"source1 foldDown(unroll(products),",
+				"     mapColumn(",
+				"          brand = products.brand,",
+				"          category = products.category,",
+				"          description = products.description,",
+				"          id = products.id,",
+				"          price = products.price,",
+				"          title = products.title",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as integer,",
+				"          title as string,",
+				"          description as string,",
+				"          price as decimal(18,2),",
+				"          category as string,",
+				"          brand as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id,",
+				"          title,",
+				"          description,",
+				"          price,",
+				"          category,",
+				"          brand",
+				"     )) ~> sink1",
+				"flatten1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink2"
+			]
+		}
+	}
+}

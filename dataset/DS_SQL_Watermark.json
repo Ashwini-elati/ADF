@@ -1,0 +1,38 @@
+{
+	"name": "DS_SQL_Watermark",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "SourceSystem",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EntityName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WatermarkValue",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LastRunUtc",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "Status",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ETL_Watermark"
+		}
+	}
+}
