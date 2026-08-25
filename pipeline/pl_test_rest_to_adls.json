@@ -180,7 +180,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "lastwatermark",
-					"value": "@activity('LookupWatermark').output.firstRow.WatermarkValue\nShow more lines"
+					"value": {
+						"value": "@activity('LookupWatermark').output.firstRow.WatermarkValue\nShow more lines",
+						"type": "Expression"
+					}
 				}
 			},
 			{
@@ -280,7 +283,7 @@
 			}
 		},
 		"annotations": [],
-		"lastPublishTime": "2026-08-21T20:05:25Z"
+		"lastPublishTime": "2026-08-24T17:31:22Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }
