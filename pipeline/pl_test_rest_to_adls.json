@@ -265,16 +265,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[etl].[usp_UpdateWatermark]",
-					"storedProcedureParameters": {
-						"watermarkvalue": {
-							"value": {
-								"value": "@string(activity('LookupLatestProductId').output.firstRow.WatermarkValue)",
-								"type": "Expression"
-							},
-							"type": "String"
-						}
-					}
+					"storedProcedureName": "[etl].[usp_UpdateWatermark]"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
