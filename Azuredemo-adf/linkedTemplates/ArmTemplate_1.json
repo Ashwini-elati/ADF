@@ -295,8 +295,13 @@
 						"typeProperties": {
 							"storedProcedureName": "[[etl].[usp_UpdateWatermark]",
 							"storedProcedureParameters": {
-								"value": "@activity('LookupLatestProductId').output.firstRow.WatermarkValue",
-								"type": "Expression"
+								"watermarkvalue": {
+									"value": {
+										"value": "@string(activity('LookupLatestProductId').output.firstRow.WatermarkValue)",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
 							}
 						},
 						"linkedServiceName": {
