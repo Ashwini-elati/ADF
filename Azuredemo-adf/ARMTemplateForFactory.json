@@ -540,7 +540,7 @@
 						"typeProperties": {
 							"variableName": "lastwatermark",
 							"value": {
-								"value": "@activity('LookupWatermark').output.firstRow.WatermarkValue\nShow more lines",
+								"value": "@activity('LookupWatermark').output.firstRow.WatermarkValue",
 								"type": "Expression"
 							}
 						}
