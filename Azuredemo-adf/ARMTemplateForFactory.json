@@ -646,7 +646,7 @@
 					}
 				},
 				"annotations": [],
-				"lastPublishTime": "2026-08-21T20:05:25Z"
+				"lastPublishTime": "2026-08-24T17:31:22Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_REST_Orders')]",
@@ -861,7 +861,7 @@
 				],
 				"typeProperties": {
 					"schema": "curated",
-					"table": "products"
+					"table": "Products"
 				}
 			},
 			"dependsOn": [
@@ -1007,7 +1007,7 @@
 					}
 				],
 				"typeProperties": {
-					"schema": "dbo",
+					"schema": "stg",
 					"table": "stg_Orders"
 				}
 			},

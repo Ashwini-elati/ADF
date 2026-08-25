@@ -272,7 +272,7 @@
 				],
 				"typeProperties": {
 					"schema": "curated",
-					"table": "products"
+					"table": "Products"
 				}
 			},
 			"dependsOn": [
@@ -418,7 +418,7 @@
 					}
 				],
 				"typeProperties": {
-					"schema": "dbo",
+					"schema": "stg",
 					"table": "stg_Orders"
 				}
 			},
